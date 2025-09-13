@@ -41,6 +41,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           autoCapitalize="none"
           autoCorrect={false}
           autoComplete="email"
+          returnKeyType="next"
+          blurOnSubmit={false}
         />
       </View>
       {errors.email && (
@@ -67,6 +69,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           autoCapitalize="none"
           autoCorrect={false}
           autoComplete="password"
+          returnKeyType="done"
+          blurOnSubmit={true}
         />
         <MaterialCommunityIcons 
           name={isPasswordVisible ? "eye-off-outline" : "eye-outline"}
@@ -85,10 +89,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
 const styles = StyleSheet.create({
   formContainer: {
-    gap: SPACING.lg,
+    gap: SPACING.md,                     // Reduced from lg to md
   },
   inputContainer: {
-    marginBottom: SPACING.sm,
+    marginBottom: SPACING.xs,            // Reduced from sm to xs
   },
   inputWrapper: {
     flexDirection: 'row',
@@ -98,7 +102,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: COLORS.border,
     paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.lg + 2,    // Slightly larger padding
+    paddingVertical: SPACING.md,         // Reduced from lg + 2 to md
     ...SHADOWS.medium,                   // Enhanced shadow
     // Add subtle gradient effect with background
     shadowColor: COLORS.primary + '20', // Tinted shadow

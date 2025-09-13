@@ -77,16 +77,16 @@ export const LoginActions: React.FC<LoginActionsProps> = ({
 
 const styles = StyleSheet.create({
   buttonSection: {
-    gap: SPACING.lg,
+    gap: SPACING.md,                     // Reduced from lg to md
     paddingHorizontal: SPACING.xl,
   },
   primaryButton: {
     backgroundColor: COLORS.primary,
     borderRadius: BORDER_RADIUS.large,
-    padding: SPACING.lg + 2,            // Slightly larger padding
+    padding: SPACING.lg,                // Reduced from lg + 2 to lg
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 58,                      // Slightly taller
+    minHeight: 52,                      // Reduced from 58 to 52
     ...SHADOWS.large,                   // Enhanced shadow
     // Add gradient-like effect with stronger shadow
     shadowColor: COLORS.primary,
@@ -132,10 +132,10 @@ const styles = StyleSheet.create({
   googleButton: {
     backgroundColor: COLORS.cardBackground,
     borderRadius: BORDER_RADIUS.large,
-    padding: SPACING.lg + 2,            // Consistent with primary button
+    padding: SPACING.lg,                // Reduced from lg + 2 to lg
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 58,                      // Consistent height
+    minHeight: 52,                      // Reduced from 58 to 52
     borderWidth: 2,
     borderColor: COLORS.primary + '20', // Subtle colored border
     ...SHADOWS.medium,                  // Add shadow
@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: SPACING.xs,
-    marginTop: SPACING.lg,              // Better spacing
-    paddingVertical: SPACING.md,        // Add vertical padding
+    marginTop: SPACING.md,              // Reduced from lg to md
+    paddingVertical: SPACING.sm,        // Add vertical padding
   },
   signUpQuestion: {
     fontSize: TYPOGRAPHY.fontSizes.md,

@@ -2,11 +2,11 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
-  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { COLORS, SPACING } from '@/constants/design-system';
 
@@ -43,15 +43,8 @@ export default function LoginScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <KeyboardAvoidingView 
-        style={styles.keyboardAvoidingView}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <ScrollView 
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollViewContent}
-          showsVerticalScrollIndicator={false}
-        >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.mainContent}>
           {/* Header Image and Title */}
           <LoginHeader 
             imageUrl={LOGIN_CONSTANTS.IMAGES.HEADER_URL}
@@ -71,19 +64,19 @@ export default function LoginScreen() {
               onTogglePasswordVisibility={togglePasswordVisibility}
             />
           </View>
-        </ScrollView>
 
-        {/* Bottom Section with Buttons */}
-        <View style={styles.bottomSection}>
-          <LoginActions
-            isValid={isValid}
-            isLoading={isLoading}
-            onLogin={handleLogin}
-            onGoogleLogin={handleGoogleLogin}
-            onSignUp={handleSignUp}
-          />
+          {/* Bottom Section with Buttons */}
+          <View style={styles.bottomSection}>
+            <LoginActions
+              isValid={isValid}
+              isLoading={isLoading}
+              onLogin={handleLogin}
+              onGoogleLogin={handleGoogleLogin}
+              onSignUp={handleSignUp}
+            />
+          </View>
         </View>
-      </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
@@ -93,23 +86,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  keyboardAvoidingView: {
+  mainContent: {
     flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollViewContent: {
-    flexGrow: 1,
+    justifyContent: 'space-between',
   },
   contentContainer: {
-    flex: 1,
     paddingHorizontal: SPACING.lg,
-    paddingTop: SPACING.lg,
+    paddingTop: SPACING.md,
+    justifyContent: 'center',
   },
   bottomSection: {
     paddingHorizontal: SPACING.lg,
-    paddingBottom: SPACING.xl,
+    paddingBottom: SPACING.lg,
     backgroundColor: COLORS.cardBackground,
   },
 });

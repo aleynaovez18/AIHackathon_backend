@@ -38,7 +38,7 @@ export const LoginHeader: React.FC<LoginHeaderProps> = ({ imageUrl, title, subti
 
 const styles = StyleSheet.create({
   headerImageContainer: {
-    height: 300,                          // Slightly taller
+    height: 200,                          // Reduced from 300 to 200
     position: 'relative',
     overflow: 'hidden',
   },
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   titleSection: {
     paddingHorizontal: SPACING.xl,
-    paddingVertical: SPACING.xxl + 8,     // More padding
+    paddingVertical: SPACING.lg,          // Reduced from xxl + 8 to lg
     alignItems: 'center',
     backgroundColor: COLORS.cardBackground,
     marginTop: -20,                       // Overlap effect
@@ -100,16 +100,16 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     alignItems: 'center',
-    marginBottom: SPACING.xl,             // More spacing
+    marginBottom: SPACING.md,             // Reduced from xl to md
   },
   title: {
-    fontSize: 36,                         // Larger title
+    fontSize: 28,                         // Reduced from 36 to 28
     fontWeight: TYPOGRAPHY.fontWeights.extraBold,
     color: COLORS.text,
     textAlign: 'center',
-    marginBottom: SPACING.md,
+    marginBottom: SPACING.sm,             // Reduced from md to sm
     letterSpacing: -0.8,                  // Better letter spacing
-    lineHeight: 42,                       // Better line height
+    lineHeight: 32,                       // Adjusted line height
   },
   titleUnderline: {
     width: 80,                            // Longer underline
