@@ -10,13 +10,13 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack initialRouteName="login">
+      <Stack initialRouteName="(tabs)">
         <Stack.Screen name="login" options={{ headerShown: false, title: 'Login' }} />
+        <Stack.Screen name="register" options={{ headerShown: false, title: 'Kayıt Ol' }} />
+        <Stack.Screen name="email-verification" options={{ headerShown: false, title: 'E-posta Doğrulama' }} />
         <Stack.Screen name="user-onboarding" options={{ headerShown: false, title: 'Kullanıcı Bilgileri' }} />
         <Stack.Screen name="welcome" options={{ headerShown: false, title: 'Welcome' }} />
-        <Stack.Screen name="departments" options={{ headerShown: false, title: 'Bölümler' }} />
-        <Stack.Screen name="profile" options={{ headerShown: false, title: 'Profil' }} />
-        <Stack.Screen name="cases" options={{ headerShown: false, title: 'Çözülen Vakalar' }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="case" options={{ headerShown: false, title: 'Vaka' }} />
         <Stack.Screen name="case-session" options={{ headerShown: false, title: 'Vaka Oturumu' }} />
         <Stack.Screen name="case-guess" options={{ headerShown: false, title: 'Vaka Tahmin' }} />

@@ -10,8 +10,7 @@ import {
   Animated
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AnimatedTabBar } from '@/components/navigation/animated-tab-bar';
-import { COLORS, TAB_ITEMS, SHADOWS, SPACING, TYPOGRAPHY, BORDER_RADIUS } from '@/constants/design-system';
+import { COLORS, SHADOWS, SPACING, TYPOGRAPHY, BORDER_RADIUS } from '@/constants/design-system';
 import { Department } from '@/constants/faculty-system';
 
 // Import organized components
@@ -39,20 +38,12 @@ import { QuickAction, ActivityData } from './types/department.types';
  */
 export default function DepartmentsScreen() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = React.useState('departments');
   const [userFaculty] = React.useState('Tıp Fakültesi'); // This should come from user storage
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   // Use custom hooks
   const greeting = useGreeting();
   const { departments, departmentStats, welcomeData, userProgress } = useDepartmentData(userFaculty);
-
-  const handleTabPress = (tabId: string, route: string) => {
-    setActiveTab(tabId);
-    if (tabId === 'profile') {
-      router.push(route as any);
-    }
-  };
 
   const handleDepartmentPress = (department: Department) => {
     router.push({ 
@@ -197,13 +188,6 @@ export default function DepartmentsScreen() {
           </View>
         </View>
       </Animated.ScrollView>
-
-      {/* Enhanced Tab Bar */}
-      <AnimatedTabBar
-        tabItems={TAB_ITEMS}
-        activeTab={activeTab}
-        onTabPress={handleTabPress}
-      />
     </View>
   );
 }

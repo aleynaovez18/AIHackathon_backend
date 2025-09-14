@@ -3,3 +3,7 @@ export { LoginForm } from './LoginForm';
 export { LoginActions } from './LoginActions';
 export { WelcomeHero } from './WelcomeHero';
 export { WelcomeActions } from './WelcomeActions';
+export { RegisterHeader } from './RegisterHeader';
+export { RegisterForm } from './RegisterForm';
+export { EmailVerificationHeader } from './EmailVerificationHeader';
+export { EmailVerificationForm } from './EmailVerificationForm';

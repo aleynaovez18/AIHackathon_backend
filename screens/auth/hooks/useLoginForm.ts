@@ -74,7 +74,7 @@ export const useLoginForm = () => {
   };
 
   const handleSignUp = () => {
-    Alert.alert('Kayıt', 'Kayıt sayfasına yönlendiriliyor...');
+    router.push('/register');
   };
 
   const isValid = formData.email.trim() !== '' && formData.password.trim() !== '';

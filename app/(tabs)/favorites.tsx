@@ -7,7 +7,6 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -112,14 +111,11 @@ export default function FavoritesScreen() {
     : 0;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar style="dark" />
       
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} style={styles.backButton}>
-          <MaterialCommunityIcons name="arrow-left" size={24} color={COLORS.text} />
-        </Pressable>
         <Text style={styles.headerTitle}>Favori Vakalar</Text>
         <Pressable onPress={() => setShowFilters(!showFilters)} style={styles.filterButton}>
           <MaterialCommunityIcons 
@@ -237,7 +233,7 @@ export default function FavoritesScreen() {
           )}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -255,9 +251,6 @@ const styles = StyleSheet.create({
     paddingBottom: SPACING.md,
     backgroundColor: COLORS.cardBackground,
     ...SHADOWS.small,
-  },
-  backButton: {
-    padding: SPACING.sm,
   },
   headerTitle: {
     fontSize: TYPOGRAPHY.fontSizes.xxl,
@@ -410,5 +403,3 @@ const styles = StyleSheet.create({
     marginTop: SPACING.sm,
   },
 });
-
-

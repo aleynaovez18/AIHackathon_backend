@@ -6,14 +6,20 @@ interface CustomInputProps {
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;
-  iconName: keyof typeof Ionicons.glyphMap;
+  iconName?: keyof typeof Ionicons.glyphMap;
+  leftIcon?: string; // For backwards compatibility
+  rightIcon?: string;
+  onRightIconPress?: () => void;
   secureTextEntry?: boolean;
   isPasswordVisible?: boolean;
   onTogglePasswordVisibility?: () => void;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   autoCorrect?: boolean;
+  autoComplete?: 'email' | 'name' | 'password' | 'new-password' | 'current-password' | 'off';
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
   style?: ViewStyle;
+  error?: string;
+  maxLength?: number;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -21,24 +27,47 @@ const CustomInput: React.FC<CustomInputProps> = ({
   value,
   onChangeText,
   iconName,
+  leftIcon,
+  rightIcon,
+  onRightIconPress,
   secureTextEntry = false,
   isPasswordVisible,
   onTogglePasswordVisibility,
   autoCapitalize = 'sentences',
   autoCorrect = true,
+  autoComplete,
   keyboardType = 'default',
   style,
+  error,
+  maxLength,
 }) => {
   const isPasswordField = secureTextEntry && onTogglePasswordVisibility;
+  
+  // Convert leftIcon to iconName for backwards compatibility
+  const actualIconName = iconName || (leftIcon as keyof typeof Ionicons.glyphMap);
+  
+  // Map MaterialCommunityIcons to Ionicons equivalents
+  const getIoniconName = (iconStr: string): keyof typeof Ionicons.glyphMap => {
+    const iconMap: { [key: string]: keyof typeof Ionicons.glyphMap } = {
+      'email': 'mail-outline',
+      'lock': 'lock-closed-outline',
+      'lock-check': 'checkmark-circle-outline',
+      'eye': 'eye-outline',
+      'eye-off': 'eye-off-outline',
+    };
+    return iconMap[iconStr] || iconStr as keyof typeof Ionicons.glyphMap;
+  };
 
   return (
     <View style={[styles.inputContainer, style]}>
-      <Ionicons 
-        name={iconName} 
-        size={20} 
-        color={styles.inputIcon.color} 
-        style={styles.inputIcon}
-      />
+      {actualIconName && (
+        <Ionicons 
+          name={getIoniconName(actualIconName as string)} 
+          size={20} 
+          color={styles.inputIcon.color} 
+          style={styles.inputIcon}
+        />
+      )}
       <TextInput
         style={styles.textInput}
         placeholder={placeholder}
@@ -48,16 +77,21 @@ const CustomInput: React.FC<CustomInputProps> = ({
         secureTextEntry={secureTextEntry && !isPasswordVisible}
         autoCapitalize={autoCapitalize}
         autoCorrect={autoCorrect}
+        autoComplete={autoComplete}
         keyboardType={keyboardType}
+        maxLength={maxLength}
       />
-      {isPasswordField && (
+      {(isPasswordField || rightIcon) && (
         <TouchableOpacity 
-          onPress={onTogglePasswordVisibility}
+          onPress={isPasswordField ? onTogglePasswordVisibility : onRightIconPress}
           style={styles.passwordToggle}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons 
-            name={isPasswordVisible ? "eye-outline" : "eye-off-outline"} 
+            name={isPasswordField 
+              ? (isPasswordVisible ? "eye-outline" : "eye-off-outline")
+              : getIoniconName(rightIcon || '')
+            } 
             size={20} 
             color="#94a3b8"
           />
