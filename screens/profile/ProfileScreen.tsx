@@ -13,7 +13,7 @@ import { useProfileData } from './hooks';
 
 export default function ProfileScreen() {
   const router = useRouter();
-  const { user, menuItems, handleLogout, handleEditAvatar } = useProfileData();
+  const { user, menuItems, handleLogout, handleEditAvatar, handleUpdateName } = useProfileData();
 
   return (
     <View style={styles.root}>
@@ -39,7 +39,7 @@ export default function ProfileScreen() {
 
       <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
         {/* Profile Card */}
-        <ProfileCard user={user} onEditAvatar={handleEditAvatar} />
+        <ProfileCard user={user} onEditAvatar={handleEditAvatar} onUpdateName={handleUpdateName} />
 
         {/* Menu Items */}
         <View style={styles.menuSection}>

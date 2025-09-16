@@ -61,7 +61,7 @@ export const useLoginForm = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       Alert.alert('Giriş', 'Giriş başarılı!');
-      router.push('/user-onboarding');
+      router.push('/departments');
     } catch (error) {
       Alert.alert('Hata', 'Giriş yapılırken bir hata oluştu');
     } finally {

@@ -7,9 +7,7 @@ export const useProfileData = () => {
   const router = useRouter();
   
   const [isLoading, setIsLoading] = React.useState(false);
-  
-  // Mock user data - in real app this would come from a user context/state
-  const user: UserProfile = {
+  const [user, setUser] = React.useState<UserProfile>({
     id: '1',
     name: 'Furkan Demir',
     title: 'Eczacılık Fakültesi - 3. Sınıf',
@@ -19,7 +17,7 @@ export const useProfileData = () => {
       badges: 8,
       successRate: 92
     }
-  };
+  });
 
   const menuItems: ProfileMenuItem[] = [
     {
@@ -28,7 +26,7 @@ export const useProfileData = () => {
       subtitle: 'Ad, soyad, e-posta düzenle',
       icon: 'account-edit',
       color: COLORS.primary,
-      onPress: () => {},
+      onPress: () => router.push('/personal-info' as any),
     },
     {
       id: 'academic-info',
@@ -36,7 +34,7 @@ export const useProfileData = () => {
       subtitle: 'Üniversite, bölüm bilgileri',
       icon: 'school',
       color: COLORS.accent,
-      onPress: () => {},
+      onPress: () => router.push('/academic-info' as any),
     },
     {
       id: 'achievements',
@@ -45,7 +43,7 @@ export const useProfileData = () => {
       icon: 'trophy',
       color: COLORS.warning,
       badge: user.stats.badges.toString(),
-      onPress: () => {},
+      onPress: () => router.push('/achievements' as any),
     },
     {
       id: 'statistics',
@@ -53,15 +51,15 @@ export const useProfileData = () => {
       subtitle: 'Detaylı performans analizi',
       icon: 'chart-line',
       color: COLORS.success,
-      onPress: () => {},
+      onPress: () => router.push('/statistics' as any),
     },
     {
       id: 'preferences',
-      title: 'Tercihler',
+      title: 'Ayarlar',
       subtitle: 'Bildirimler, tema ayarları',
       icon: 'cog',
       color: COLORS.textMuted,
-      onPress: () => {},
+      onPress: () => router.push('/settings' as any),
     },
     {
       id: 'help',
@@ -69,7 +67,7 @@ export const useProfileData = () => {
       subtitle: 'SSS, iletişim',
       icon: 'help-circle',
       color: COLORS.textLight,
-      onPress: () => {},
+      onPress: () => router.push('/help-support' as any),
     },
   ];
 
@@ -78,7 +76,17 @@ export const useProfileData = () => {
   };
 
   const handleEditAvatar = () => {
-    // Implementation for avatar editing
+    // Implementation for avatar editing - would typically upload to server
+    console.log('Avatar updated');
+  };
+
+  const handleUpdateName = (newName: string) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      name: newName
+    }));
+    // In real app, this would also update the backend
+    console.log('Name updated to:', newName);
   };
 
   return {
@@ -86,6 +94,7 @@ export const useProfileData = () => {
     menuItems,
     isLoading,
     handleLogout,
-    handleEditAvatar
+    handleEditAvatar,
+    handleUpdateName
   };
 };

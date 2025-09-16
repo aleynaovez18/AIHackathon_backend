@@ -178,7 +178,8 @@ export default function FavoritesScreen() {
                 key={caseItem.id} 
                 style={styles.caseCard}
                 onPress={() => {
-                  console.log('Case selected:', caseItem.id);
+                  // Navigate to case review screen
+                  router.push(`/case-review?caseId=${caseItem.id}` as any);
                 }}
               >
                 <View style={styles.caseHeader}>
@@ -227,6 +228,11 @@ export default function FavoritesScreen() {
                   <Text style={styles.lastAccessedDate}>
                     Son erişim: {new Date(caseItem.lastAccessed).toLocaleDateString('tr-TR')}
                   </Text>
+                  
+                  <View style={styles.reviewHint}>
+                    <MaterialCommunityIcons name="eye" size={14} color={COLORS.primary} />
+                    <Text style={styles.reviewHintText}>Çözüm sürecini incele</Text>
+                  </View>
                 </View>
               </Card>
             ))
@@ -401,5 +407,19 @@ const styles = StyleSheet.create({
     fontSize: TYPOGRAPHY.fontSizes.xs,
     color: COLORS.textMuted,
     marginTop: SPACING.sm,
+  },
+  reviewHint: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
+    marginTop: SPACING.sm,
+    paddingTop: SPACING.sm,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border + '30',
+  },
+  reviewHintText: {
+    fontSize: TYPOGRAPHY.fontSizes.xs,
+    color: COLORS.primary,
+    fontWeight: TYPOGRAPHY.fontWeights.medium,
   },
 });
